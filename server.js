@@ -33,6 +33,11 @@ $("#save-note").on("click", function (event) {
     };
     $.post("/api/notes", newNote)
       .then(function (data) {
-        console.log()
-      })
-};
+        console.log("notes.html", data);
+        alert("Saved notes");
+      });
+});
+
+
+
+
