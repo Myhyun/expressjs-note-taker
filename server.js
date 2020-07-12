@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-const { userInfo } = require("os");
 
 const app = express();
 var PORT = process.env.PORT || 3001;
@@ -12,6 +11,13 @@ app.listen(PORT, () => {
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 
-app.get("/", function(req, res) {
+// Basic route that sends users to the home page
+app.get("*", function(req, res) {
     res.json(path.join(__dirname, "public/index.html"));
-  });
+});
+
+//Route that will send users to the notes page
+app.get("/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+});
+
