@@ -4,6 +4,7 @@ const fs = require("fs");
 const app = express();
 var PORT = process.env.PORT || 3000;
 
+
 app.listen(PORT, () => {
   console.log("App listening on PORT " + PORT);
 });
@@ -41,8 +42,17 @@ app.post("/api/notes", (req, res) => {
   });
 });
 
+const notesData = require("./db/db.json")
+
 app.delete("/ap/notes:id", (req, res) => {
-  res.send("Delete request for ID = " + req.params.id);
+  const { id } = req.params;
+  const notesIndex = notesData.indexOf(notes => notes.id === id);
+  if (notesIndex === -1) {
+    res.sendStatus(404);
+  } else {
+    notesData.splice(notesIndex, 1);
+    res.send("Deleted 1 note");
+  };
 });
 
 // Basic route that sends users to the home page
