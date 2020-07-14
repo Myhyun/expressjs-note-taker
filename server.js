@@ -15,28 +15,17 @@ app.use(express.json());
 
 // Basic route that sends users to the home page
 app.get("*", function(req, res) {
-    res.json(path.join(__dirname, "public/index.html"));
+    res.json(path.join(__dirname, "../../index.html"));
 });
 
 //Route that will send users to the notes page
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/notes.html"));
+    res.sendFile(path.join(__dirname, "../../notes.html"));
 });
 
 //API ROUTES
 
-$("#save-note").on("click", function (event) {
-    event.preventDefault();
-    var newNote = {
-      title: $("#note-title").val(),
-      text: $("#note-textarea").val()
-    };
-    $.post("/api/notes", newNote)
-      .then(function (data) {
-        console.log("notes.html", data);
-        alert("Saved notes");
-      });
-});
+
 
 
 
